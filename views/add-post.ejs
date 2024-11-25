@@ -1,0 +1,63 @@
+<%- include('./partials/header.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+<link rel="stylesheet" href="/styles/forms.css">
+
+<div style="max-width: 95%; margin-left: 40px">
+  <h1><%= title %></h1>
+
+  <form method="post" action="">
+    <div class="mb-3">
+      <label for="title" class="form-label">Name</label>
+      <input 
+        required 
+        type="text" 
+        class="form-control" 
+        id="title" 
+        name="title" 
+        maxlength="100" 
+        oninput="updateCharacterCount('title', 100)"
+      />
+      <div id="titleCount">0/100</div>
+    </div>
+    <div class="mb-3">
+      <label for="author" class="form-label">Author</label>
+      <input 
+        required 
+        type="text" 
+        class="form-control" 
+        id="author" 
+        name="author" 
+        maxlength="50" 
+        oninput="updateCharacterCount('author', 50)"
+      />
+      <div id="authorCount">0/50</div>
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">Text</label>
+      <textarea 
+        required 
+        class="form-control" 
+        id="content" 
+        name="content" 
+        rows="5" 
+        maxlength="16000"
+        oninput="updateCharacterCount('content', 2000)"
+      ></textarea>
+      <div id="contentCount">0/16000</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+</div>
+
+
+<script>
+  function updateCharacterCount(fieldId, maxLength) {
+    const field = document.getElementById(fieldId);
+    const countElement = document.getElementById(fieldId + 'Count');
+    const currentLength = field.value.length;
+    countElement.textContent = `${currentLength}/${maxLength}`;
+  }
+</script>
+
